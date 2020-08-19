@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'account.apps.AccountConfig',
+    'pages.apps.PagesConfig',
     #   oauth application
     'django.contrib.sites',
     'social_django',
@@ -132,10 +133,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 from django.contrib.messages import constants as messages
 
 MESSAGE_TAGS = {
-    'danger' : messages.ERROR,
-    'success' : messages.SUCCESS,
-    'warning' : messages.WARNING,
-    'info' : messages.INFO
+    messages.ERROR : 'danger',
+    messages.SUCCESS : 'success',
+    messages.WARNING : 'warning',
+    messages.INFO : 'info'
 }
 
 #   oauth requirements

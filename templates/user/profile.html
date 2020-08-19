@@ -1,0 +1,17 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+    <div class="container" style="margin-top: 20px;">
+        <div class="row">
+
+            <div class="col-sm-9">
+                <h3>{{user_data.first_name}} {{user_data.last_name}}</h3>
+            </div>
+
+            <div class="col-sm-3">
+                <div class="profilepic" style="width:calc(8.2vw + 50px);height:calc(8.2vw + 50px);background:url('{{user_data.userprofile.profile_image.url}}');border-radius:5px;background-position:center;background-size:cover;"></div>
+            </div>
+            
+        </div>
+    </div>
+{%endblock%}

@@ -13,5 +13,9 @@ urlpatterns = [
     path('account/', include('account.urls')),
 
     #   social auth urls below here
-    path('oauth/', include('social_django.urls'), name='social')
+    path('oauth/', include('social_django.urls'), name='social'),
+
+    #   path starting with regular expression
+    path('', include('pages.urls')),
+
 ]+static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

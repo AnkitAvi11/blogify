@@ -6,29 +6,34 @@
         <div class="col-sm-6">
             <div class="card">
                 <div class="card-body">
+                    {%include '../error.html'%}
                     <h4 style="text-align:center;">Hola ! Login to continue </h4>
                     <p style="text-align:center">
                         <i class="fab fa-cuttlefish" style="font-size: 100px;color:orangered"></i>
-                        
                     </p>
                     <p>
                         <a href="{%url 'social:begin' 'google-oauth2' %}" class="nav-link btn btn-primary"><i class="fab fa-google"></i> Login using google</a>
                     </p>
-                    <p style="text-align:center">
-                        OR
-                    </p>
+                    
+                </div>
+            </div>
+            <p style="text-align:center;font-weight:bolder;margin-top:15px">
+                OR
+            </p>
+            <div class="card">
+                <div class="card-body">
                     <form action="{%url 'login' %}" method="post">
                         {% csrf_token %}
-                        <p><small>
-                            If you have a password set
+                        <p><small style="font-weight: bolder;">
+                            If you have set a password for your account 
                         </small> </p>
                         <div class="form-group">
                             <label for="username">Username or Email address</label>
-                            <input type="text" name="username" id="username" class="form-control" autofocus placeholder="Your username or email address">
+                            <input type="text" name="username" id="username" class="form-control" autofocus placeholder="Your username or email address" required="required">
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" name="password" id="password" class="form-control" placeholder="Enter your set password here">
+                            <input type="password" name="password" id="password" class="form-control" placeholder="Enter your set password here" required="required">
                         </div>
                         <div class="form-group">
                             <input type="submit" value="LOGIN" class="btn btn-primary" style="width: 100%;">
@@ -37,9 +42,9 @@
                     <p>
                         Dont have an account ? <a href="{%url 'signup' %}">Signup</a>
                     </p>
-
                 </div>
             </div>
+
         </div>
         <div class="col-sm-3"></div>
     </div>
