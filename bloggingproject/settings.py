@@ -123,6 +123,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'public')
 ]
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 #   messages and tag settings
 
@@ -145,4 +148,8 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend'
 )
 
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = "2895459789-8duqdbag4e1l046c9jusfpvjm8rtgdt8.apps.googleusercontent.com"
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "h8kZJu1A-ZK_hRN5EKHMkUxf"
+
 LOGIN_REDIRECT_URL = '/'
+

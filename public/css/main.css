@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Footer Section */
+
+
+footer.main-footer {
+    padding: 80px 0 0;
+    overflow-x: hidden;
+  }
+  footer.main-footer a {
+    color: inherit;
+    text-decoration: none;
+  }
+  footer.main-footer .brand {
+    font-weight: 800;
+    font-size: 1.7rem;
+    color: #222;
+    margin-bottom: 20px;
+  }
+  footer.main-footer ul.contact-info {
+    color: #444;
+  }
+  footer.main-footer ul.contact-info a {
+    margin-bottom: 5px;
+  }
+  footer.main-footer ul.contact-info a:hover {
+    color: #5989e5;
+  }
+  footer.main-footer h5 {
+    margin-bottom: 30px;
+  }
+  footer.main-footer ul.links {
+    color: #888;
+  }
+  footer.main-footer ul.links a {
+    margin-bottom: 8px;
+  }
+  footer.main-footer ul.links a:hover {
+    color: #5989e5;
+  }
+  footer.main-footer ul.social-icons {
+    margin-top: 15px;
+    margin-bottom: 50px;
+  }
+  .social-link{
+    color: #000;
+    margin: 2.5px;
+    padding: 0%;
+    font-size: 1.5rem;
+  }
+  .social-link:hover{
+    color: #1ea5f7;
+  }
+  footer.main-footer ul.social-icons a:hover {
+    background: #5989e5;
+  }
+  footer.main-footer .copyrights {
+    margin-top: 50px;
+  }
+  footer.main-footer .copyrights .container {
+    padding: 30px 0;
+    border-top: 1px solid #ddd;
+  }
+  footer.main-footer .copyrights p {
+    margin-bottom: 0;
+  }
+  footer.main-footer .copyrights a:hover {
+    color: #5989e5;
+  }
+  @media (max-width: 991px) {
+    footer.main-footer {
+        padding: 100px 0 0;
+    }
+    footer.main-footer .copyrights {
+        margin-top: 100px;
+    }
+    footer.main-footer .copyrights div[class*="col-"] {
+        text-align: center !important;
+    }
+  }
+  
+  #terms{
+    font-family: "Poppins", sans-serif;
+    overflow-x: hidden;
+    
+  }
+  
+  .dark-mode {
+    background-color: #121212;
+    color: white;
+  }
