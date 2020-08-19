@@ -7,6 +7,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
+from .models import Follower, Notifications
+from datetime import datetime
+
 #   function to log the user in the application
 @is_loggedin
 def loginUser(request) : 
@@ -36,3 +39,30 @@ def signupUser(request) :
 def logoutUser(request) : 
     logout(request)
     return redirect('/account/login')
+
+
+#   view function to follow a user
+@login_required(login_url='/account/login/')
+def followUser(request) :
+    if request.method == 'POST' : 
+        user_from = request.user;user_to = request.POST.get("to_user")
+
+        user_to = User.objects.get(id=user_to)
+        
+        if Follower.objects.filter(user_from=user_from, user_to=user_to).exists() : 
+            follow = Follower.objects.get(user_from=user_from,user_to=user_to)
+            follow.delete()
+            return JsonResponse({
+                "message" : "Follow",
+                "Action Performed" : "Unfollow" 
+            })
+        else : 
+            Follower.objects.create(user_from = user_from, user_to = user_to)
+            Notifications.objects.create(user=user_to, title="{} started following you".format(user_from), time_created=datetime.now(), link="/@{}".format(user_from))
+            return JsonResponse({
+                "message" : "Unfollow",
+                "Action Performed" : "Follow" 
+            })
+
+    else : 
+        return redirect("/")

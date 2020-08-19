@@ -18,12 +18,18 @@
         </ul>
 
         <ul class="navbar-nav ml-auto">
+            {%if user.is_authenticated%}
+            <li class="nav-item">
+                <a href="#" class="nav-link">{{user.username}}</a>
+            </li>
+            {%else%}
             <li class="nav-item {%if 'login' in request.path%}active{%endif%}">
                 <a href="{%url 'login'%}" class="nav-link">Login <i class="fas fa-sign-in-alt"></i></a>
             </li>
             <li class="nav-item {%if 'signup' in request.path%}active{%endif%}">
                 <a href="{%url 'signup'%}" class="nav-link">Signup <i class="fas fa-user-plus"></i></a>
             </li>
+            {%endif%}
         </ul>
 
         </div> 

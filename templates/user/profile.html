@@ -5,13 +5,96 @@
         <div class="row">
 
             <div class="col-sm-9">
-                <h3>{{user_data.first_name}} {{user_data.last_name}}</h3>
+                <nav style="position: sticky;top:0px">
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                      <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true" style="color: grey;">Posts</a>
+                      <a class="nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false" style="color: grey;">Blogs</a>
+                      <a class="nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false" style="color: grey;">Discussions</a>
+                    </div>
+                  </nav>
+                  <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">...</div>
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+                </div>
+                
             </div>
 
             <div class="col-sm-3">
-                <div class="profilepic" style="width:calc(8.2vw + 50px);height:calc(8.2vw + 50px);background:url('{{user_data.userprofile.profile_image.url}}');border-radius:5px;background-position:center;background-size:cover;"></div>
+                <div id="profilepic" style="width:100%;height:250px;background:url('{{user_data.userprofile.profile_image.url}}');border-radius:5px;background-position:center;background-size:cover;"></div>
+
+                <h4 style="margin-top:15px">{{user_data.first_name}} {{user_data.last_name}}</h4>
+                <p><span class="badge badge-primary">@{{user_data.username}}</span></p>
+                <p>
+                    {%if user.is_authenticated%}
+                        {%if user == user_data%}
+                            <a href="#" class="btn btn-outline-secondary" style="width: 100%;">Edit profile</a>
+                        {%else%}
+                            <a href="#" class="btn btn-success" style="width: 100%;" to_user={{user_data.id}} from_user={{user.id}} id="followButton">{{status}}</a>
+                        {%endif%}
+                    {%endif%}
+                </p>
+                <p style="font-size:14px;text-align:justify;"><a href="#" style="color: black;">Followers {{followers}}</a> | <a href="#" style="color: black;">Following {{followings}}</a></p>
+                
+                {%if user_data.userprofile.bio%}
+                <p style="font-size: 12px;">
+                    {{user_data.userprofile.bio}}
+                </p>
+                {%else%}
+                <p style="font-size: 12px;">
+                    Oops ! Error 404, Bio not found 
+                </p>
+                {%endif%}
+            
+                {%if user_data.userprofile.website%}
+                <p style="font-size: 13px;"><a href="{{user_data.userprofile.website}}" target="_blank"><i class="fas fa-link"></i> {{user_data.userprofile.website}}</a></p>
+                {%endif%}
+                <h4>
+                    {%if user_data.userprofile.github%}
+                    <a href="{{user_data.userprofile.github}}" style="color: black;" target="_blank"><i class="fab fa-github"></i></a>
+                    {%endif%}
+                    {%if user_data.userprofile.linkedin%}
+                    <a href="{{user_data.userprofile.linkedin}}" style="color: dodgerblue;" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    {%endif%}
+                </h4>
+                {%csrf_token%}
             </div>
             
         </div>
     </div>
+
+    <script>
+        let profile = document.getElementById('profilepic')
+        let width = profile.clientWidth;
+        profile.style.height = width+"px";
+        window.onresize = (e => {
+            width = profile.clientWidth;
+            profile.style.height = width+"px";
+        });
+
+        window.onload = () => {
+            let followButton = document.getElementById('followButton')
+            let from_id = followButton.getAttribute('from_user'), to_id = followButton.getAttribute('to_user')         
+
+            followButton.onclick = () => {
+                let csrf = document.querySelector("input[type=hidden]").value
+                console.log(csrf)
+                let body = new FormData()
+                body.append('to_user', to_id)
+                fetch("http://127.0.0.1:8000/account/followUser/", {
+                    method : "POST",
+                    body : body,
+                    headers : {
+                        "X-CSRFToken" : csrf
+                    }
+                }).then(res => res.json())
+                .then(data => {
+                    followButton.textContent = data.message;
+                })
+                .catch(err => console.log(err))
+            }
+
+        }
+    </script>
+
 {%endblock%}
