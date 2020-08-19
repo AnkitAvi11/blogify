@@ -27,6 +27,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
+    'account.apps.AccountConfig',
+    #   oauth application
+    'django.contrib.sites',
+    'social_django',
+
 ]
 
 MIDDLEWARE = [
@@ -44,7 +50,9 @@ ROOT_URLCONF = 'bloggingproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -110,7 +118,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/public/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'public')
+]
 
 
 #   messages and tag settings
@@ -123,3 +134,15 @@ MESSAGE_TAGS = {
     'warning' : messages.WARNING,
     'info' : messages.INFO
 }
+
+#   oauth requirements
+SITE_ID = 1
+
+#   authentication backend
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend'
+)
+
+LOGIN_REDIRECT_URL = '/'
