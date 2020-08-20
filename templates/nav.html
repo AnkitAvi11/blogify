@@ -1,3 +1,4 @@
+{%load humanize%}
 <nav class="navbar navbar-expand-md bg-light navbar-light">
     <div class="container">
         <a class="navbar-brand" href="{%url 'home' %}" style="color: dodgerblue;font-weight:bolder"><i class="fab fa-cuttlefish"></i>ommunion</a>
@@ -19,8 +20,37 @@
 
         <ul class="navbar-nav ml-auto">
             {%if user.is_authenticated%}
-            <li class="nav-item">
-                <a href="#" class="nav-link">{{user.username}}</a>
+            <li class="nav-item dropdown" style="margin-right: 20px;">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bell"></i> <span class="badge badge-warning">{{user.userprofile.countNotifications}}</span>  </a>
+                <div class="dropdown-menu">
+                    {%if user.userprofile.countNotifications <= 0%}
+                    <a href="#" class="dropdown-item">You are all caught up</a>
+                    {%else%}
+                        {%for notification in user.userprofile.getNotifications %}
+                        <a href="{{notification.link}}" class="dropdown-item" style="font-size: 13px;border-bottom:1px solid lightgrey">
+                            <span style="font-weight: bolder;">{{notification}}</span>
+                            <br>
+                            {{notification.time_created|naturaltime}}
+                        </a>
+                        {%endfor%}
+                    {%endif%}
+                    <div class="dropdown-item">
+                        <a href="" style="font-size: 13px;margin-top:10px;color:dodgerblue">View all</a>
+                        &nbsp;&nbsp;
+                        <a href="" style="font-size: 13px;margin-top:10px;color:dodgerblue">Mark all as read</a>
+                    </div>                    
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {{user.username}}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">View profile</a>
+                  <a class="dropdown-item" href="#">Write a blog</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{%url 'logout' %}">Logout</a>
+                </div>
             </li>
             {%else%}
             <li class="nav-item {%if 'login' in request.path%}active{%endif%}">

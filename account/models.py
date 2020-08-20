@@ -34,6 +34,14 @@ class UserProfile(models.Model) :
 
         super().save(*args, **kwargs)
 
+    def countNotifications(self) : 
+        return Notifications.objects.filter(user=self.user).exclude(is_read=True).count()
+
+    def getNotifications(self) : 
+        notifications = Notifications.objects.filter(user=self.user).exclude(is_read=True).order_by('-time_created')
+        print(notifications)
+        return notifications[:5]
+
 #   user profile creation automated
 def createProfile(sender, **kwargs) : 
     if kwargs['created'] : 
