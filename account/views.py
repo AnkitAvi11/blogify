@@ -66,3 +66,11 @@ def followUser(request) :
 
     else : 
         return redirect("/")
+
+
+@login_required(login_url='/account/login/')
+def markAsRead(request) : 
+    Notifications.objects.filter(user=request.user).update(is_read = True)
+    return JsonResponse({
+        'counts' : 0
+    })
