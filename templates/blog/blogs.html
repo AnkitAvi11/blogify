@@ -10,7 +10,9 @@
             font-size:12px;
             border-radius: 4px;
         }
-        
+        .popover-body{
+          font-size: 12px;
+        }
     </style>
 {%endblock%}
 {%block content%}
@@ -28,7 +30,13 @@
                               </a>
                               <p class="card-text">
                                   <small>
-                                    Published by <a href="#">@{{blog.user}}</a>
+                                    Published by <a href="#" data-toggle="popover" title="{{blog.user}}" data-content="
+                                    {%if blog.user.userprofile.bio%}
+                                    {{blog.user.userprofile.bio}}
+                                    {%else%}
+                                    No user bio found
+                                    {%endif%}
+                                    " data-trigger="focus">@{{blog.user}}</a>
                                   </small>
                               </p>
                               <p class="card-text">{{blog.description}}</p>
@@ -93,7 +101,8 @@
             </div>
 
             <div class="col-sm-4">
-                <div class="card">
+                <div style="position: sticky;top:20px">
+                  <div class="card">
                     <div class="card-body">
                         <form action="" method="post">
                             <div class="form-group">
@@ -104,11 +113,18 @@
                             </div>
                         </form>
                     </div>
+                  </div>
                 </div>
             </div>
 
         </div>
 
     </div>
+
+    <script>
+      $(function () {
+        $('[data-toggle="popover"]').popover()
+      });
+    </script>
     
 {%endblock%}

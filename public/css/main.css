@@ -5,8 +5,11 @@
     font-family: 'Roboto', sans-serif;
 }
 
-/* Footer Section */
+body {
+  background: #F6F8FA;
+}
 
+/* Footer Section */
 
 footer.main-footer {
     padding: 80px 0 0;
