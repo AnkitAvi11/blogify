@@ -6,7 +6,7 @@ from django.utils import timezone
 class Blog (models.Model) : 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=200, blank=False, null=False)
-    slug = models.SlugField(blank=False, null=False)
+    slug = models.TextField(blank=False, null=False)
     description = models.CharField(max_length=500, blank=True, null=True)
     body = models.TextField(blank=False, null=False)
     thumbnail = models.ImageField(upload_to = "blogs/%Y/%m/")

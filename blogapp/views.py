@@ -7,6 +7,8 @@ from django.utils.text import slugify
 import string
 from django.contrib import messages
 
+from django.core.paginator import Paginator
+
 #   function to generate random string of a given length
 def random_string_generator(size = 10, chars = string.ascii_lowercase + string.digits): 
     return ''.join(random.choice(chars) for _ in range(size))
@@ -37,8 +39,8 @@ def add_blog(request) :
             messages.success(request, 'Blog has been sucessfully published')
             return redirect('/blog/add/')
             
-        except Exception : 
-            messages.error(request, Exception)
+        except Exception as e: 
+            messages.error(request, e)
             return render(request, 'blog/addblog.html', context)    
     else : 
         return render(request, 'blog/addblog.html', context)
@@ -48,4 +50,8 @@ def add_blog(request) :
 def viewallblogs(request) : 
     blogs = Blog.objects.exclude().order_by('-pub_date')
     print(blogs)
-    return render(request, 'blog/blogs.html', {"blogs" : blogs})
+    paginator = Paginator(blogs, 10)
+    page = request.GET.get('page')
+    paged_blogs = paginator.get_page(page)
+    print(paged_blogs)
+    return render(request, 'blog/blogs.html', {"blogs" : paged_blogs})

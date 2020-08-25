@@ -39,7 +39,6 @@ class UserProfile(models.Model) :
 
     def getNotifications(self) : 
         notifications = Notifications.objects.filter(user=self.user).exclude(is_read=True).order_by('-time_created')
-        print(notifications)
         return notifications[:5]
 
 #   user profile creation automated
