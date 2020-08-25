@@ -11,7 +11,7 @@
             <a class="nav-link" href="{%url 'home' %}">Home <i class="fas fa-home"></i></a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="#">Blogs <i class="fas fa-blog"></i></a>
+            <a class="nav-link" href="{%url 'allblogs' %}">Blogs <i class="fas fa-blog"></i></a>
             </li>
             <li class="nav-item">
             <a class="nav-link" href="#">Discussions <i class="far fa-comments"></i></a>
@@ -48,7 +48,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="{%url  'view_user' request.user %}">View profile</a>
                   <a class="dropdown-item" href="#">Dashboard</a>
-                  <a class="dropdown-item" href="#">Create a blog</a>
+                  <a class="dropdown-item" href="{%url 'addblog' %}">Create a blog</a>
                   <a class="dropdown-item" href="#">Create a post</a>
                   <a class="dropdown-item" href="#">Request resources</a>
                   <div class="dropdown-divider"></div>

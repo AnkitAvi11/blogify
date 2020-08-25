@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'account.apps.AccountConfig',
     'pages.apps.PagesConfig',
+    'blogapp.apps.BlogappConfig',
     #   oauth application
     'django.contrib.sites',
     'social_django',
@@ -142,9 +143,9 @@ MESSAGE_TAGS = {
 #   oauth requirements
 SITE_ID = 1
 
-#   authentication backend
+#   authentication backends used in this project
 AUTHENTICATION_BACKENDS = (
-    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.google.GoogleOAuth',
     'social_core.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend'
 )

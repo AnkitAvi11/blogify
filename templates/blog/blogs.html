@@ -1,0 +1,82 @@
+{%extends 'base.html'%}
+{%load humanize%}
+{%block title%}All blogs{%endblock%}
+{%block headcontent%}
+    <style>
+        .card-columns {
+            column-count: 2;
+        }
+        .blog_btn {
+            font-size:12px;
+            border-radius: 4px;
+        }
+    </style>
+{%endblock%}
+{%block content%}
+    <div class="container" style="margin-top: 20px;">
+        <div class="row">
+            <div class="col-sm-8">
+                {%if blogs.count > 0%}
+                    {%for blog in blogs%}
+                    <div class="card">
+                        <div class="row no-gutters">
+                          <div class="col-md-{%if blog.thumbnail%}8{%else%}12{%endif%}">
+                            <div class="card-body">
+                              <a href="#">
+                                <h5 class="card-title">{{blog.title}}</h5>
+                              </a>
+                              <p class="card-text">
+                                  <small>
+                                    Published by <a href="#">@{{blog.user}}</a>
+                                  </small>
+                              </p>
+                              <p class="card-text">{{blog.description}}</p>
+                            </div>
+                          </div>
+                          {%if blog.thumbnail%}
+                          <div class="col-md-4">
+                            <img src="{{blog.thumbnail.url}}" class="card-img" alt="...">
+                            </div>
+                          {%endif%}
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+
+                                <div class="btn-group">
+                                    <a href="#" class="btn btn-info blog_btn">Read <i class="fab fa-readme"></i></a>
+                                    <a href="#" class="btn btn-outline-secondary blog_btn">Bookmark <i class="fas fa-bookmark"></i></a>
+                                </div>
+
+                                <p class="card-text"><small class="text-muted">Published {{blog.pub_date | naturaltime}}</small></p>
+                              </div>
+                        </div>
+                      </div>
+                    {%endfor%}
+                {%else%}
+                <div style="text-align:center">
+                    <img src="/public/images/none.svg" alt="Not found" style="width: 40%;">
+                    <h5>No blogs found at this moment</h5>
+                </div>
+                {%endif%}
+            </div>
+
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="" method="post">
+                            <div class="form-group">
+                                <input type="search" name="search" id="search" class="form-control" placeholder="Search for blogs">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Search" class="btn btn-secondary">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    
+{%endblock%}

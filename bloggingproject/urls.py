@@ -11,6 +11,7 @@ urlpatterns = [
 
     #   own applications below here
     path('account/', include('account.urls')),
+    path('blog/', include('blogapp.urls')),
 
     #   social auth urls below here
     path('oauth/', include('social_django.urls'), name='social'),
